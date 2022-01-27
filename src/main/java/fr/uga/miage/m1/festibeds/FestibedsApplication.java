@@ -71,6 +71,19 @@ public class FestibedsApplication implements CommandLineRunner {
     plumesHotel.setPrix(250);
     plumesHotel.setType(TypeEtablissement.HOTEL);
 
+    Photo photo2 = new Photo();
+    photo2.setType("PHOTO_HOTEL");
+    photo2.setUrl("toz.png");
+
+    Photo photo3 = new Photo();
+    photo3.setType("PHOTO_HOTEL");
+    photo3.setUrl("ok.png");
+
+    plumesHotel.getPhotos().add(photo2);
+  
+    photo2.setEtablissement(plumesHotel);
+
+
     Etablissement grandHotel = new Etablissement();
     grandHotel.setAdresse("Lyon");
     grandHotel.setCapaciteAcceuil(320);
@@ -91,6 +104,11 @@ public class FestibedsApplication implements CommandLineRunner {
     grandHotel.setPrix(260);
     grandHotel.setType(TypeEtablissement.HOTEL);
 
+    grandHotel.getPhotos().add(photo3);
+    photo3.setEtablissement(grandHotel);
+
+    
+
     karim.getEtablissements().add(plumesHotel);
     karim.getEtablissements().add(grandHotel);
 
@@ -104,17 +122,19 @@ public class FestibedsApplication implements CommandLineRunner {
     eddy.setTelephone("0674967463");
 
     Festival festivalDeCanne = new Festival();
+    festivalDeCanne.setNomManifestation("Festival de Cannes");
     festivalDeCanne.setCommentaire(
         "Toute l'équipe du Festival de Cannes est heureuse de vous accueillir pour cette nouvelle édition");
-    festivalDeCanne.setDateDebut(LocalDate.now());
-    festivalDeCanne.setDateFin(LocalDate.now().plusDays(30));
-    festivalDeCanne.setDomaine("Pluridisciplinaire");
-    festivalDeCanne.setDuree(30);
+    festivalDeCanne.setDomaine("Cinéma et audiovisuel");
+    festivalDeCanne.setSous_domaine("");
     festivalDeCanne.setMoisHabituelDebut("Mai");
     festivalDeCanne.setNbPassDisponibles(400);
     festivalDeCanne.setPeriodicite("annuelle");
     festivalDeCanne.setPrix(450);
     festivalDeCanne.setSiteWeb("www.festival-cannes.com");
+    festivalDeCanne.setDateDebut(LocalDate.now());
+    festivalDeCanne.setDateFin(LocalDate.now().plusDays(30));
+    festivalDeCanne.setDuree(30);
     festivalDeCanne.setOrganisateur(eddy);
     Photo photo1 = new Photo();
     photo1.setType("PHOTO_FESTIVAL");
@@ -123,6 +143,36 @@ public class FestibedsApplication implements CommandLineRunner {
     photo1.setFestival(festivalDeCanne);
 
     eddy.getFestivals().add(festivalDeCanne);
+
+    Festival festivalDeGrenoble = new Festival();
+    festivalDeGrenoble.setNomManifestation("Festival de Grenoble");
+    festivalDeGrenoble.setCommentaire(
+        "Toute l'équipe du Festival de Grenoble est heureuse de vous accueillir");
+    festivalDeGrenoble.setDomaine("Cirque et Arts de la rue");
+    festivalDeGrenoble.setSous_domaine("Arts de la rue");
+    festivalDeGrenoble.setMoisHabituelDebut("Avril");
+    festivalDeGrenoble.setNbPassDisponibles(400);
+    festivalDeGrenoble.setPeriodicite("annuelle");
+    festivalDeGrenoble.setPrix(450);
+    festivalDeGrenoble.setSiteWeb("www.festival-grenoble.com");
+    festivalDeGrenoble.setDateDebut(LocalDate.now());
+    festivalDeGrenoble.setDateFin(LocalDate.now().plusDays(30));
+    festivalDeGrenoble.setDuree(30);
+    festivalDeGrenoble.setOrganisateur(eddy);
+    Photo photo4 = new Photo();
+    photo4.setType("PHOTO_FESTIVAL");
+    photo4.setUrl("https://www.48imagesseconde.fr/wp-content/uploads/2017/03/Affiche-2018-web.jpg");
+    festivalDeGrenoble.getPhotos().add(photo4);
+    photo4.setFestival(festivalDeGrenoble);
+
+    eddy.getFestivals().add(festivalDeGrenoble);
+
+
+
+
+
+
+
     organisateurDAO.save(eddy);
 
     Festivalier ahmed = new Festivalier();

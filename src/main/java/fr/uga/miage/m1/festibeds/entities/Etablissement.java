@@ -1,5 +1,9 @@
 package fr.uga.miage.m1.festibeds.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fr.uga.miage.m1.festibeds.entities.enums.TypeEtablissement;
 import lombok.AllArgsConstructor;
@@ -49,5 +55,9 @@ public class Etablissement {
     @JoinColumn(name = "hebergeur_id")
     @JsonBackReference
     Hebergeur hebergeur;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "etablissement", cascade = CascadeType.ALL)
+    List<Photo> photos = new ArrayList<Photo>();
 
 }

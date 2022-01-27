@@ -29,7 +29,9 @@ public class Festival {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ndegIdentification")
   int id;
+  String nomManifestation;
   String domaine;
+  String sous_domaine;
   int nbPassDisponibles;
   String periodicite;
   String moisHabituelDebut;
@@ -57,7 +59,5 @@ public class Festival {
   @JsonManagedReference
   @OneToMany(mappedBy = "festival", cascade = CascadeType.ALL)
   List<AvisFestival> avis = new ArrayList<>();
-
-
 
 }
