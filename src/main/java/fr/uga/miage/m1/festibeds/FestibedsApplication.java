@@ -12,12 +12,15 @@ import fr.uga.miage.m1.festibeds.dao.FestivalDAO;
 import fr.uga.miage.m1.festibeds.dao.FestivalierDAO;
 import fr.uga.miage.m1.festibeds.dao.HebergeurDAO;
 import fr.uga.miage.m1.festibeds.dao.OrganisateurDAO;
+import fr.uga.miage.m1.festibeds.dao.PhotoDAO;
 import fr.uga.miage.m1.festibeds.entities.AvisFestival;
 import fr.uga.miage.m1.festibeds.entities.Etablissement;
 import fr.uga.miage.m1.festibeds.entities.Festival;
 import fr.uga.miage.m1.festibeds.entities.Festivalier;
 import fr.uga.miage.m1.festibeds.entities.Hebergeur;
 import fr.uga.miage.m1.festibeds.entities.Organisateur;
+import fr.uga.miage.m1.festibeds.entities.Photo;
+import fr.uga.miage.m1.festibeds.entities.enums.TypeEtablissement;
 
 @SpringBootApplication
 public class FestibedsApplication implements CommandLineRunner {
@@ -31,6 +34,8 @@ public class FestibedsApplication implements CommandLineRunner {
   FestivalierDAO festivalierDAO;
   @Autowired
   AvisFestivalDAO avisFestivalDAO;
+  @Autowired
+  PhotoDAO photoDAO;
 
   public static void main(String[] args) {
     SpringApplication.run(FestibedsApplication.class, args);
@@ -61,7 +66,10 @@ public class FestibedsApplication implements CommandLineRunner {
     plumesHotel.setTelephone("0684069586");
     plumesHotel.setSiteInternet("plumesHotel.fr");
     plumesHotel.setHebergeur(karim);
+    plumesHotel.setCapaciteAcceuil(50);
+    plumesHotel.setNbChambres(44);
     plumesHotel.setPrix(250);
+    plumesHotel.setType(TypeEtablissement.HOTEL);
 
     Etablissement grandHotel = new Etablissement();
     grandHotel.setAdresse("Lyon");
@@ -78,7 +86,10 @@ public class FestibedsApplication implements CommandLineRunner {
     grandHotel.setTelephone("0689573957");
     grandHotel.setSiteInternet("grandHotel.fr");
     grandHotel.setHebergeur(karim);
+    grandHotel.setNbChambres(80);
+    grandHotel.setCapaciteAcceuil(65);
     grandHotel.setPrix(260);
+    grandHotel.setType(TypeEtablissement.HOTEL);
 
     karim.getEtablissements().add(plumesHotel);
     karim.getEtablissements().add(grandHotel);
@@ -105,6 +116,11 @@ public class FestibedsApplication implements CommandLineRunner {
     festivalDeCanne.setPrix(450);
     festivalDeCanne.setSiteWeb("www.festival-cannes.com");
     festivalDeCanne.setOrganisateur(eddy);
+    Photo photo1 = new Photo();
+    photo1.setUrl("https://media2.boutique-clouet.fr/2396-thickbox_default/affiche-festival-de-cannes-de-1951.jpg");
+    photoDAO.save(photo1);
+    festivalDeCanne.getPhotos().add(photo1);
+
 
     eddy.getFestivals().add(festivalDeCanne);
     organisateurDAO.save(eddy);
@@ -133,10 +149,21 @@ public class FestibedsApplication implements CommandLineRunner {
     avisMitiaCannes.setNote(5);
     avisMitiaCannes.setFestivalier(mitia);
     avisMitiaCannes.setFestival(festivalDeCanne);
-
     avisFestivalDAO.save(avisMitiaCannes);
 
+    AvisFestival avisAhmedCannes = new AvisFestival();
+
+    avisAhmedCannes.setAvis(
+        "J'ai adore ce festival ! je recommande");
+    avisAhmedCannes.setNote(5);
+    avisAhmedCannes.setFestivalier(ahmed);
+    avisAhmedCannes.setFestival(festivalDeCanne);
+    avisFestivalDAO.save(avisAhmedCannes);
+
     festivalDeCanne.getAvis().add(avisMitiaCannes);
+    festivalDeCanne.getAvis().add(avisAhmedCannes);
+
+
 
   }
 

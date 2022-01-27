@@ -51,7 +51,14 @@ public class Festival {
   List<Festivalier> festivaliers = new ArrayList<>();
 
   @JsonManagedReference
+  @JoinColumn(name = "photo_id")
+  @OneToMany
+  List<Photo> photos = new ArrayList<Photo>();
+
+  @JsonManagedReference
   @OneToMany(mappedBy = "festival", cascade = CascadeType.ALL)
   List<AvisFestival> avis = new ArrayList<>();
+
+
 
 }

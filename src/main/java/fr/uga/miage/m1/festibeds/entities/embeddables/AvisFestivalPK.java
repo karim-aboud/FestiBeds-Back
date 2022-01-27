@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 
+
 import lombok.Data;
 
 @Data
