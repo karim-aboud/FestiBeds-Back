@@ -51,8 +51,7 @@ public class Festival {
   List<Festivalier> festivaliers = new ArrayList<>();
 
   @JsonManagedReference
-  @JoinColumn(name = "photo_id")
-  @OneToMany
+  @OneToMany(mappedBy = "festival", cascade = CascadeType.ALL)
   List<Photo> photos = new ArrayList<Photo>();
 
   @JsonManagedReference

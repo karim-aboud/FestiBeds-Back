@@ -117,10 +117,10 @@ public class FestibedsApplication implements CommandLineRunner {
     festivalDeCanne.setSiteWeb("www.festival-cannes.com");
     festivalDeCanne.setOrganisateur(eddy);
     Photo photo1 = new Photo();
+    photo1.setType("PHOTO_FESTIVAL");
     photo1.setUrl("https://media2.boutique-clouet.fr/2396-thickbox_default/affiche-festival-de-cannes-de-1951.jpg");
-    photoDAO.save(photo1);
     festivalDeCanne.getPhotos().add(photo1);
-
+    photo1.setFestival(festivalDeCanne);
 
     eddy.getFestivals().add(festivalDeCanne);
     organisateurDAO.save(eddy);
@@ -162,7 +162,8 @@ public class FestibedsApplication implements CommandLineRunner {
 
     festivalDeCanne.getAvis().add(avisMitiaCannes);
     festivalDeCanne.getAvis().add(avisAhmedCannes);
-
+    festivalDAO.save(festivalDeCanne);
+    
 
 
   }

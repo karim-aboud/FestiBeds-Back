@@ -10,34 +10,34 @@ import fr.uga.miage.m1.festibeds.entities.Organisateur;
 
 @Service
 public class OrganisateurService {
-    @Autowired
-    private OrganisateurDAO organisateurRepository;
+  @Autowired
+  private OrganisateurDAO organisateurDAO;
 
-    public Organisateur createOrganisateur(Organisateur organisateur){
-        return organisateurRepository.save(organisateur);
-    }
+  public Organisateur createOrganisateur(Organisateur organisateur) {
+    return organisateurDAO.save(organisateur);
+  }
 
-    public List<Organisateur> createOrganisateurs(List<Organisateur> organisateurs) {
-        return organisateurRepository.saveAll(organisateurs);
-      }
-    
-      public Organisateur getOrganisateurById(int id) {
-        return organisateurRepository.findById(id).get();
-      }
-    
-      public List<Organisateur> getOrganisateurs() {
-        return organisateurRepository.findAll();
-      }
-    
-      public Organisateur updateOrganisateur(Organisateur organisateur) {
-        return organisateurRepository.save(organisateur);
-      }
-    
-      public void deleteOrganisateurById(int id) {
-        this.organisateurRepository.deleteById(id);
-      }
-    
-      public void deleteAll() {
-        this.organisateurRepository.deleteAll();
-      }
+  public List<Organisateur> createOrganisateurs(List<Organisateur> organisateurs) {
+    return organisateurDAO.saveAll(organisateurs);
+  }
+
+  public Organisateur getOrganisateurById(int id) {
+    return organisateurDAO.findById(id).get();
+  }
+
+  public List<Organisateur> getOrganisateurs() {
+    return organisateurDAO.findAll();
+  }
+
+  public Organisateur updateOrganisateur(Organisateur organisateur) {
+    return organisateurDAO.save(organisateur);
+  }
+
+  public void deleteOrganisateurById(int id) {
+    this.organisateurDAO.deleteById(id);
+  }
+
+  public void deleteAll() {
+    this.organisateurDAO.deleteAll();
+  }
 }
