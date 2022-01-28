@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.uga.miage.m1.festibeds.dao.AvisFestivalDAO;
-import fr.uga.miage.m1.festibeds.entities.AvisFestival;
+import fr.uga.miage.m1.festibeds.entities.embeddables.AvisFestival;
 import fr.uga.miage.m1.festibeds.entities.embeddables.AvisFestivalPK;
 
 @Service

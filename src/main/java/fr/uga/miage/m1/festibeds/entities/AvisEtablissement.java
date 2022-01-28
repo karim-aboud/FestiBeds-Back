@@ -8,14 +8,14 @@ import javax.persistence.MapsId;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import fr.uga.miage.m1.festibeds.entities.embeddables.AvisFestivalPK;
+import fr.uga.miage.m1.festibeds.entities.embeddables.AvisEtablissementPK;
 import lombok.Data;
 
 @Data
 @Entity
-public class AvisFestival {
+public class AvisEtablissement {
     @EmbeddedId
-    AvisFestivalPK id = new AvisFestivalPK();
+    AvisEtablissementPK id = new AvisEtablissementPK();
 
     @ManyToOne
     @MapsId("festivalierId")
@@ -24,11 +24,12 @@ public class AvisFestival {
     Festivalier festivalier = new Festivalier();
 
     @ManyToOne
-    @MapsId("festivalId")
-    @JoinColumn(name = "festival_id")
+    @MapsId("etablissementId")
+    @JoinColumn(name = "etablissement_id")
     @JsonIgnore
-    Festival festival = new Festival();
+    Etablissement etablissement = new Etablissement();
 
     int note;
     String avis;
+    
 }

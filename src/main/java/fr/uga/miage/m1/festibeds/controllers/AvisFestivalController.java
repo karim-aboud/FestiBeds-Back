@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.uga.miage.m1.festibeds.entities.AvisFestival;
+import fr.uga.miage.m1.festibeds.entities.embeddables.AvisFestival;
 import fr.uga.miage.m1.festibeds.entities.embeddables.AvisFestivalPK;
 import fr.uga.miage.m1.festibeds.services.AvisFestivalService;
 

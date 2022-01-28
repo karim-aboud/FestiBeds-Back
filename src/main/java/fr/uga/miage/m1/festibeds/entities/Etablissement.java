@@ -60,4 +60,9 @@ public class Etablissement {
     @OneToMany(mappedBy = "etablissement", cascade = CascadeType.ALL)
     List<Photo> photos = new ArrayList<Photo>();
 
+    @OneToMany(mappedBy = "etablissement", cascade = CascadeType.ALL)
+    List<AvisEtablissement> avis = new ArrayList<>();
+
+
+
 }

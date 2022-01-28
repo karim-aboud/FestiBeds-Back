@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import fr.uga.miage.m1.festibeds.entities.embeddables.AvisFestival;
 import lombok.Data;
 
 @Data
@@ -31,7 +32,7 @@ public class Festival {
   int id;
   String nomManifestation;
   String domaine;
-  String sous_domaine;
+  String sousDomaine;
   int nbPassDisponibles;
   String periodicite;
   String moisHabituelDebut;

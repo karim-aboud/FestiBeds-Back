@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import fr.uga.miage.m1.festibeds.entities.embeddables.AvisFestival;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
