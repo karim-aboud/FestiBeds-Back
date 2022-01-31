@@ -29,9 +29,19 @@ public class CommuneController {
         return communeService.createCommune(commune);
     }
 
-    @GetMapping("/communes/{id}")
+    @GetMapping("/communes/insee/{id}")
     public Commune getCommuneById(@PathVariable String id) {
         return communeService.getCommuneById(id);
+    }
+
+    @GetMapping("/communes/nom/{nom}")
+    public Commune getByNomCommune(@PathVariable String nom){
+        return communeService.findByNomCommune(nom);
+    }
+
+    @GetMapping("/communes/cp/{code}")
+    public Commune getByNomCommune(@PathVariable int code){
+        return communeService.findByCodePostal(code);
     }
 
     @GetMapping("/communes")

@@ -13,6 +13,6 @@ public class AvisFestivalPK implements Serializable {
   int festivalierId;
 
   @Column(name = "ndeg_id")
-  int festivalId;
+  String festivalId;
 
 }

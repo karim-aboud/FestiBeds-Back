@@ -30,7 +30,7 @@ public class AvisFestivalController {
     }
 
     @GetMapping("/avisFestivals/{festivalId}/{festivalierId}")
-    public AvisFestival getAvisFestivalById(@PathVariable int festivalId, @PathVariable int festivalierId) {
+    public AvisFestival getAvisFestivalById(@PathVariable String festivalId, @PathVariable int festivalierId) {
         AvisFestivalPK id = new AvisFestivalPK();
         id.setFestivalId(festivalId);
         id.setFestivalierId(festivalierId);
@@ -48,7 +48,7 @@ public class AvisFestivalController {
     }
 
     @DeleteMapping("/avisFestivals/{festivalId}/{festivalierId}")
-    public void deleteAvisFestival(@PathVariable int festivalId, @PathVariable int festivalierId) {
+    public void deleteAvisFestival(@PathVariable String festivalId, @PathVariable int festivalierId) {
         AvisFestivalPK id = new AvisFestivalPK();
         id.setFestivalId(festivalId);
         id.setFestivalierId(festivalierId);

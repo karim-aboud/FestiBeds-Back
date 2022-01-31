@@ -22,6 +22,14 @@ public class CommuneService {
         return communeDAO.findById(id).get();
     }
 
+    public Commune findByNomCommune(String nom){
+        return communeDAO.findByNomCommune(nom);
+    }
+
+    public Commune findByCodePostal(int code){
+        return communeDAO.findByCodePostal(code);
+    }
+
     public List<Commune> getCommune() {
         return communeDAO.findAll();
     }
@@ -37,6 +45,7 @@ public class CommuneService {
     public void deleteAll() {
         this.communeDAO.deleteAll();
     }
+
 
     
 }

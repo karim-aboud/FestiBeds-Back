@@ -7,5 +7,6 @@ import fr.uga.miage.m1.festibeds.domain.entities.Commune;
 
 @Repository
 public interface CommuneDAO extends JpaRepository<Commune, String>{
-  
+  Commune findByNomCommune(String nom);
+  Commune findByCodePostal(int codePostal);
 }
