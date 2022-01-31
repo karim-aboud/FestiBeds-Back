@@ -78,7 +78,7 @@ public class FestibedsG3Application implements CommandLineRunner {
     festivalDAO.save(lesNuitsSecretes);
 
     Commune commune = new Commune();
-    commune.setCodeINSEE("1000");
+    commune.setCodeInsee("1000");
     commune.setCodePostal(38000);
     commune.setNomCommune("Grenoble");
     commune.getFestivals().add(lesNuitsSecretes);

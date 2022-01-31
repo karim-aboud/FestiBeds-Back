@@ -19,6 +19,6 @@ public class Reservation {
     int id ;
 
     LocalDate dateReservation;
-    String statuReservation;
+    String statutReservation;
     String montant;
 }

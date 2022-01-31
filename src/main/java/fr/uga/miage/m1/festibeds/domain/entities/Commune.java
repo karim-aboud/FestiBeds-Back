@@ -14,11 +14,11 @@ import lombok.Data;
 @Entity
 public class Commune {
     @Id
-    String codeINSEE;
+    String codeInsee;
     int codePostal;
     String nomCommune;
     @OneToMany
-    @JoinColumn(name="codeINSEE")
+    @JoinColumn(name="codeInsee")
     List<Festival> festivals = new ArrayList<Festival>();
 
 

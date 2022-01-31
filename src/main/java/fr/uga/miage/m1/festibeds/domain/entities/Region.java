@@ -19,10 +19,6 @@ public class Region {
 
     @OneToMany
     @JoinColumn(name="nomRegion")
-    List<Commune> communes = new ArrayList<Commune>();
-
-    @OneToMany
-    @JoinColumn(name="nomRegion")
     List<Departement> departements = new ArrayList<>();
     
 }
