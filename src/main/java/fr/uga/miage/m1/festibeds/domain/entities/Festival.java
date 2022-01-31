@@ -59,8 +59,8 @@ public class Festival {
   @OneToMany(mappedBy = "festival", cascade = CascadeType.ALL)
   List<AvisFestival> avis = new ArrayList<>();
 
-  // @OneToMany
-  // List<Reservation> reservations = new ArrayList<>(); ????????? 
+  @OneToMany(mappedBy = "festival")
+  List<Reservation> reservations = new ArrayList<>(); 
 
   @OneToMany(mappedBy = "festival")
   List<Hebergement> hebergements = new ArrayList<>();

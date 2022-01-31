@@ -16,6 +16,7 @@ import fr.uga.miage.m1.festibeds.domain.entities.Festivalier;
 import fr.uga.miage.m1.festibeds.domain.entities.Hebergeur;
 import fr.uga.miage.m1.festibeds.domain.entities.Organisateur;
 import fr.uga.miage.m1.festibeds.domain.entities.Photo;
+import fr.uga.miage.m1.festibeds.domain.entities.Reservation;
 import fr.uga.miage.m1.festibeds.domain.entities.enums.TypeEtablissement;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.AvisEtablissementDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.AvisFestivalDAO;
@@ -26,6 +27,7 @@ import fr.uga.miage.m1.festibeds.infrastructure.dao.FestivalierDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.HebergeurDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.OrganisateurDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.PhotoDAO;
+import fr.uga.miage.m1.festibeds.infrastructure.dao.ReservationDAO;
 
 @SpringBootApplication
 public class FestibedsG3Application implements CommandLineRunner {
@@ -47,6 +49,8 @@ public class FestibedsG3Application implements CommandLineRunner {
   PhotoDAO photoDAO;
   @Autowired
   CommuneDAO communeDAO;
+  @Autowired
+  ReservationDAO reservationDAO;
 
   public static void main(String[] args) {
     SpringApplication.run(FestibedsG3Application.class, args);
@@ -239,6 +243,14 @@ public class FestibedsG3Application implements CommandLineRunner {
     ahmed.setTelephone("0674967403");
     ahmed.getFestivals().add(festivalDeCanne);
     festivalierDAO.save(ahmed); // festivalier_festival
+
+    Reservation reservationAhmed = new Reservation();
+    reservationAhmed.setFestivalier(ahmed);
+    reservationAhmed.setMontant("550");
+    reservationAhmed.setStatutReservation("En cours");
+    reservationAhmed.setDateReservation(LocalDate.now());
+    reservationAhmed.setFestival(festivalDeCanne);
+    reservationDAO.save(reservationAhmed);
 
     Festivalier mitia = new Festivalier();
     mitia.setNom("Ravelobaoavy");

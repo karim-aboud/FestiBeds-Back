@@ -20,9 +20,9 @@ public class Festivalier extends CompteUtilisateur {
   @OneToMany(mappedBy = "festivalier", cascade = CascadeType.ALL)
   List<AvisFestival> avis = new ArrayList<>();
 
-  @OneToMany
-  @JoinColumn(name="festivalier_id")
-  List<Reservation> reservations = new ArrayList<>();
+  // @OneToMany
+  // @JoinColumn(name="festivalier_id")
+  // List<Reservation> reservations = new ArrayList<>();
 
   public List<Festival> getFestivals() {
     return festivals;
