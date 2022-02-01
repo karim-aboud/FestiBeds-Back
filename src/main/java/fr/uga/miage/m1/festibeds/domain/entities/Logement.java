@@ -43,7 +43,7 @@ public class Logement {
     @JsonIncludeProperties("id")
     Hebergement hebergement;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JsonIncludeProperties({"id","type","nomCommercial"})
     @JoinColumn(name="logement_id", nullable = true)
     Etablissement etablissement;

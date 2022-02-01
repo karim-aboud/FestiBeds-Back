@@ -26,9 +26,14 @@ public class FestivalController {
     return festivalService.createFestival(festival);
   }
 
-  @GetMapping("/festivals/{id}")
-  public Festival getFestivalById(@PathVariable String id) {
+  @GetMapping("/festivals/id/{id}")
+  public Festival getFestivalById(@PathVariable(required = true) String id) {
     return festivalService.getFestivalById(id);
+  }
+
+  @GetMapping("/festivals/{nom}")
+  public List<Festival> getFestivalsByNomManifestation(@PathVariable String nom){
+    return festivalService.getFestivalsByNomManifestation(nom);
   }
 
   @GetMapping("/festivals")

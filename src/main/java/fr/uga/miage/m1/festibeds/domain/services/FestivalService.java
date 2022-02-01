@@ -22,6 +22,15 @@ public class FestivalService {
     return festivalDAO.findById(id).get();
   }
 
+  public List<Festival> getFestivalsByNomManifestation(String nom){
+    if(nom.length() >= 3){
+      return festivalDAO.findByNomManifestationContainingIgnoreCase(nom);
+
+    } else{
+      return null;
+    }
+  }
+
   public List<Festival> getFestivals() {
     return festivalDAO.findAll();
   }

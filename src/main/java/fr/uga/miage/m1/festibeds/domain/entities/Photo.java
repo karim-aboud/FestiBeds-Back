@@ -21,17 +21,17 @@ public class Photo {
     String url;
     
     @JsonBackReference(value="festival-photo")
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JoinColumn(name = "festival_id")
     Festival festival;
 
     @JsonBackReference(value="etablissement-photo")
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JoinColumn(name = "etablissement_id")
     Etablissement etablissement;
 
     @JsonBackReference(value="logement-photo")
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JoinColumn(name = "logement_id")
     Logement logement;
 

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.uga.miage.m1.festibeds.domain.entities.Logement;
 import fr.uga.miage.m1.festibeds.domain.services.LogementService;
-import net.bytebuddy.description.type.TypeDescription.Generic.OfWildcardType.Latent;
 
 @RestController
 @CrossOrigin(origins = "*")

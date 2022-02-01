@@ -25,7 +25,7 @@ public class AvisEtablissement {
 
     @ManyToOne
     @MapsId("etablissementId")
-    @JoinColumn(name = "etablissement_id")
+    @JoinColumn(name = "etablissement_id", nullable = true)
     @JsonIgnore
     Etablissement etablissement = new Etablissement();
 
