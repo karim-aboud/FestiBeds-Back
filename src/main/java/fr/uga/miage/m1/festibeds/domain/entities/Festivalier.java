@@ -6,16 +6,24 @@ import java.util.List;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 
+@Data
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations"})
 public class Festivalier extends CompteUtilisateur {
 
-  @ManyToMany
-  @JoinTable(name = "FESTIVALIER_FESTIVAL", joinColumns = @JoinColumn(name = "festivalier_id"), inverseJoinColumns = @JoinColumn(name = "ndeg_id"))
+  @ManyToMany  @JoinTable(name = "FESTIVALIER_FESTIVAL", joinColumns = @JoinColumn(name = "festivalier_id"), inverseJoinColumns = @JoinColumn(name = "ndeg_id"))
   List<Festival> festivals = new ArrayList<>();
+
 
   @OneToMany(mappedBy = "festivalier", cascade = CascadeType.ALL)
   List<AvisFestival> avis = new ArrayList<>();
@@ -24,20 +32,4 @@ public class Festivalier extends CompteUtilisateur {
   @JoinColumn(name="festivalier_id")
   List<Reservation> reservations = new ArrayList<>();
 
-  public List<Festival> getFestivals() {
-    return festivals;
-  }
-
-  public void setFestivals(List<Festival> festivals) {
-    this.festivals = festivals;
-  }
-
-  public List<AvisFestival> getAvis() {
-    return avis;
-  }
-
-  public void setAvis(List<AvisFestival> avis) {
-    this.avis = avis;
-  }
-
-}
+} 

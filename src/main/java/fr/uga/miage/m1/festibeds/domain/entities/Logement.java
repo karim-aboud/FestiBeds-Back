@@ -36,8 +36,9 @@ public class Logement {
     TypeLogement type;
 
     @ManyToOne
-    @JoinColumn(name="hebergement_id")
-    Hebergement hebergement;
+    @JoinColumn(name="etablissement_id")
+    Etablissement etablissement;
+
 
     @JsonManagedReference
     @OneToMany(mappedBy = "logement", cascade = CascadeType.ALL)

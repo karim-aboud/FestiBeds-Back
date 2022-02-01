@@ -1,5 +1,0 @@
-spring.datasource.url=jdbc:postgresql://ec2-52-211-158-144.eu-west-1.compute.amazonaws.com:5432/deb8ad2pb2jfrc
-spring.datasource.username=aierlvtcrefydo
-spring.datasource.password=91a84363355717acf640e79f9d43a1ced10f294ff4e15aa04d2e8977839c16ba
-spring.jpa.show-sql=true
-spring.jpa.hibernate.ddl-auto=update

@@ -13,10 +13,14 @@ import fr.uga.miage.m1.festibeds.domain.entities.Commune;
 import fr.uga.miage.m1.festibeds.domain.entities.Etablissement;
 import fr.uga.miage.m1.festibeds.domain.entities.Festival;
 import fr.uga.miage.m1.festibeds.domain.entities.Festivalier;
+import fr.uga.miage.m1.festibeds.domain.entities.Hebergement;
 import fr.uga.miage.m1.festibeds.domain.entities.Hebergeur;
+import fr.uga.miage.m1.festibeds.domain.entities.Logement;
 import fr.uga.miage.m1.festibeds.domain.entities.Organisateur;
 import fr.uga.miage.m1.festibeds.domain.entities.Photo;
+import fr.uga.miage.m1.festibeds.domain.entities.Reservation;
 import fr.uga.miage.m1.festibeds.domain.entities.enums.TypeEtablissement;
+import fr.uga.miage.m1.festibeds.domain.entities.enums.TypeLogement;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.AvisEtablissementDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.AvisFestivalDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.CommuneDAO;
@@ -24,8 +28,10 @@ import fr.uga.miage.m1.festibeds.infrastructure.dao.EtablissementDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.FestivalDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.FestivalierDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.HebergeurDAO;
+import fr.uga.miage.m1.festibeds.infrastructure.dao.LogementDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.OrganisateurDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.PhotoDAO;
+import fr.uga.miage.m1.festibeds.infrastructure.dao.ReservationDAO;
 
 @SpringBootApplication
 public class FestibedsG3Application implements CommandLineRunner {
@@ -47,6 +53,10 @@ public class FestibedsG3Application implements CommandLineRunner {
   PhotoDAO photoDAO;
   @Autowired
   CommuneDAO communeDAO;
+  @Autowired
+  ReservationDAO reservationDAO;
+  @Autowired
+  LogementDAO logementDAO;
 
   public static void main(String[] args) {
     SpringApplication.run(FestibedsG3Application.class, args);
@@ -135,6 +145,8 @@ public class FestibedsG3Application implements CommandLineRunner {
     plumesHotel.setNbChambres(44);
     plumesHotel.setPrix(250);
     plumesHotel.setType(TypeEtablissement.HOTEL);
+
+   
 
     Photo photo2 = new Photo();
     photo2.setType("PHOTO_HOTEL");
@@ -233,11 +245,44 @@ public class FestibedsG3Application implements CommandLineRunner {
 
     organisateurDAO.save(eddy);
 
+    Photo photo5 = new Photo();
+    photo5.setType("PHOTO_HEBERGEMENT");
+    photo5.setUrl("https://pixabay.com/photos/to-travel-hotel-room-hotel-room-1677347/");
+
+    Logement chambre255Plumes = new Logement();
+    chambre255Plumes.setDescription("Chambre double wifi confortable");
+    chambre255Plumes.setNbPersonnes(2);
+    chambre255Plumes.setType(TypeLogement.CHAMBRE_DOUBLE);
+    chambre255Plumes.setPrix(89);
+    chambre255Plumes.getPhotos().add(photo5);
+    chambre255Plumes.setOptionsSpecifiques(" vue sur mer");
+    chambre255Plumes.setEtablissement(plumesHotel);
+
+    plumesHotel.getLogements().add(chambre255Plumes);
+
+    logementDAO.save(chambre255Plumes);
+    
+    Hebergement hebergementAhmed = new Hebergement ();
+    hebergementAhmed.setFestival(festivalDeCanne);
+    hebergementAhmed.setLogement(chambre255Plumes);
+    
+
+    Reservation reservationAhmed = new Reservation();
+    LocalDate date = LocalDate.now();    
+    reservationAhmed.setDateReservation(date);
+    reservationAhmed.setId(001);
+    reservationAhmed.setStatutReservation("en cours");
+    reservationAhmed.setMontant(festivalDeCanne.getPrix());
+    reservationAhmed.getHebergement().add(hebergementAhmed);
+
+    reservationDAO.save(reservationAhmed);
+
     Festivalier ahmed = new Festivalier();
     ahmed.setNom("Kimour");
     ahmed.setPrenom("ahmed");
     ahmed.setTelephone("0674967403");
     ahmed.getFestivals().add(festivalDeCanne);
+    ahmed.getReservations().add(reservationAhmed);
     festivalierDAO.save(ahmed); // festivalier_festival
 
     Festivalier mitia = new Festivalier();
