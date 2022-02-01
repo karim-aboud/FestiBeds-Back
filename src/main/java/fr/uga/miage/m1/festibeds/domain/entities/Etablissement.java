@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fr.uga.miage.m1.festibeds.domain.entities.enums.TypeEtablissement;
@@ -26,6 +28,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class Etablissement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,6 +67,7 @@ public class Etablissement {
     List<AvisEtablissement> avis = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinColumn(name="etablissement_id")
     List<Logement> logements = new ArrayList<>();
 }

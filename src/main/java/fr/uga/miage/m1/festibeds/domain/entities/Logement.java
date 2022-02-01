@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fr.uga.miage.m1.festibeds.domain.entities.enums.TypeLogement;
@@ -22,6 +23,7 @@ import lombok.Data;
 
 @Data
 @Entity
+
 public class Logement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -17,12 +17,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
 @Data
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","hebergements"})
 public class Festival {
 
   @Id
@@ -63,6 +66,7 @@ public class Festival {
   // List<Reservation> reservations = new ArrayList<>(); ????????? 
 
   @OneToMany(mappedBy = "festival")
+  @JsonIgnore
   List<Hebergement> hebergements = new ArrayList<>();
 
 }
