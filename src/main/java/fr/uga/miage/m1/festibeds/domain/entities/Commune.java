@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
@@ -17,9 +19,11 @@ public class Commune {
     String codeInsee;
     int codePostal;
     String nomCommune;
-    @OneToMany
-    @JoinColumn(name="codeInsee")
+    String nomDepartement;
+    String nomRegion;
+    @OneToMany(mappedBy = "commune")
     List<Festival> festivals = new ArrayList<Festival>();
-
+    @OneToMany(mappedBy = "commune")
+    List<Etablissement> etablissements = new ArrayList<>();
 
 }

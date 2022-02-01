@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +27,7 @@ public class Organisateur extends CompteUtilisateur {
   String motDePasse;
 
   @OneToMany(mappedBy = "organisateur", cascade = CascadeType.ALL)
-  @JsonManagedReference
+  @JsonIncludeProperties({"ndegIdentification","nomManifestation"})
   List<Festival> festivals = new ArrayList<>();
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class Hebergeur extends CompteUtilisateur{
     String courriel;
     String motDePasse;
     @OneToMany(mappedBy = "hebergeur", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @JsonIgnore
     List<Etablissement> etablissements = new ArrayList<>();
 
 

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
@@ -38,4 +39,7 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name="festival_id")
     Festival festival;
+    @OneToMany
+    @JoinColumn(name="reservation_id")
+    List<Hebergement> hebergements = new ArrayList<>() ;
 }

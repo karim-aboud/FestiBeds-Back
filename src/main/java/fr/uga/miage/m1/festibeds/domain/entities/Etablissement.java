@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fr.uga.miage.m1.festibeds.domain.entities.enums.TypeEtablissement;
@@ -40,9 +42,6 @@ public class Etablissement {
     int nbEmplacements;
     String description;
     String siteInternet;
-    String adresse;
-    String codePostal;
-    String commune;
     String telephone;
     String courriel;
     String coordonnees;
@@ -53,17 +52,21 @@ public class Etablissement {
 
     @ManyToOne
     @JoinColumn(name = "hebergeur_id")
-    @JsonBackReference
+    @JsonIgnore
     Hebergeur hebergeur;
 
-    @JsonManagedReference
+    @JsonManagedReference(value="etablissement-photo")
     @OneToMany(mappedBy = "etablissement", cascade = CascadeType.ALL)
     List<Photo> photos = new ArrayList<Photo>();
 
     @OneToMany(mappedBy = "etablissement", cascade = CascadeType.ALL)
     List<AvisEtablissement> avis = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="etablissement_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "etablissement")
     List<Logement> logements = new ArrayList<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties({"festivals","etablissements"})
+    @JoinColumn(name="code_insee_commune")
+    Commune commune;
 }

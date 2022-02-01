@@ -13,18 +13,23 @@ import fr.uga.miage.m1.festibeds.domain.entities.Commune;
 import fr.uga.miage.m1.festibeds.domain.entities.Etablissement;
 import fr.uga.miage.m1.festibeds.domain.entities.Festival;
 import fr.uga.miage.m1.festibeds.domain.entities.Festivalier;
+import fr.uga.miage.m1.festibeds.domain.entities.Hebergement;
 import fr.uga.miage.m1.festibeds.domain.entities.Hebergeur;
+import fr.uga.miage.m1.festibeds.domain.entities.Logement;
 import fr.uga.miage.m1.festibeds.domain.entities.Organisateur;
 import fr.uga.miage.m1.festibeds.domain.entities.Photo;
 import fr.uga.miage.m1.festibeds.domain.entities.Reservation;
 import fr.uga.miage.m1.festibeds.domain.entities.enums.TypeEtablissement;
+import fr.uga.miage.m1.festibeds.domain.entities.enums.TypeLogement;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.AvisEtablissementDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.AvisFestivalDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.CommuneDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.EtablissementDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.FestivalDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.FestivalierDAO;
+import fr.uga.miage.m1.festibeds.infrastructure.dao.HebergementDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.HebergeurDAO;
+import fr.uga.miage.m1.festibeds.infrastructure.dao.LogementDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.OrganisateurDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.PhotoDAO;
 import fr.uga.miage.m1.festibeds.infrastructure.dao.ReservationDAO;
@@ -51,6 +56,10 @@ public class FestibedsG3Application implements CommandLineRunner {
   CommuneDAO communeDAO;
   @Autowired
   ReservationDAO reservationDAO;
+  @Autowired
+  LogementDAO logementDAO;
+  @Autowired
+  HebergementDAO hebergementDAO;
 
   public static void main(String[] args) {
     SpringApplication.run(FestibedsG3Application.class, args);
@@ -73,6 +82,7 @@ public class FestibedsG3Application implements CommandLineRunner {
     lesNuitsSecretes.setPrix(450);
     lesNuitsSecretes.setSiteWeb("https://www.lesnuitssecretes.com/");
     lesNuitsSecretes.setNbPassDisponibles(400);
+    
     Photo photoLNS = new Photo();
     photoLNS.setType("PHOTO_FESTIVAL");
     photoLNS.setUrl("https://generation.hautsdefrance.fr/wp-content/uploads/2019/03/NS2.jpg");
@@ -80,13 +90,6 @@ public class FestibedsG3Application implements CommandLineRunner {
     photoLNS.setFestival(lesNuitsSecretes);
 
     festivalDAO.save(lesNuitsSecretes);
-
-    Commune commune = new Commune();
-    commune.setCodeInsee("1000");
-    commune.setCodePostal(38000);
-    commune.setNomCommune("Grenoble");
-    commune.getFestivals().add(lesNuitsSecretes);
-    communeDAO.save(commune);
 
     Festival lollapaloozaParis = new Festival();
     lollapaloozaParis.setNdegIdentification("2");
@@ -120,10 +123,8 @@ public class FestibedsG3Application implements CommandLineRunner {
     karim.setTelephone("0640753164");
 
     Etablissement plumesHotel = new Etablissement();
-    plumesHotel.setAdresse("Paris");
     plumesHotel.setCapaciteAcceuil(300);
     plumesHotel.setClassement(4);
-    plumesHotel.setCodePostal("78500");
     // plumesHotel.setCommune("Saint-Nom-la-Bretèche");
     plumesHotel.setCoordonnees("48.8558° N, 2.0191° E");
     plumesHotel.setCourriel("lesplumes@gmail.com");
@@ -140,6 +141,23 @@ public class FestibedsG3Application implements CommandLineRunner {
     plumesHotel.setPrix(250);
     plumesHotel.setType(TypeEtablissement.HOTEL);
 
+    
+    Commune commune = new Commune();
+    commune.setCodeInsee("1000");
+    commune.setCodePostal(38000);
+    commune.setNomDepartement("Isere");
+    commune.setNomRegion("Auvergne Rhone Alpes");
+    commune.setNomCommune("Grenoble");
+    commune.getFestivals().add(lesNuitsSecretes);
+    commune.getEtablissements().add(plumesHotel);
+    communeDAO.save(commune);
+
+    plumesHotel.setCommune(commune);
+    lesNuitsSecretes.setCommune(commune);
+    festivalDAO.save(lesNuitsSecretes);
+    hebergeurDAO.save(karim);
+    etablissementDAO.save(plumesHotel);
+
     Photo photo2 = new Photo();
     photo2.setType("PHOTO_HOTEL");
     photo2.setUrl("toz.png");
@@ -153,10 +171,8 @@ public class FestibedsG3Application implements CommandLineRunner {
     photo2.setEtablissement(plumesHotel);
 
     Etablissement grandHotel = new Etablissement();
-    grandHotel.setAdresse("Lyon");
     grandHotel.setCapaciteAcceuil(320);
     grandHotel.setClassement(5);
-    grandHotel.setCodePostal("69000");
     //grandHotel.setCommune("Affoux");
     grandHotel.setCoordonnees("45.8450° N, 4.4118° E");
     grandHotel.setCourriel("grandHotel@gmail.com");
@@ -237,6 +253,29 @@ public class FestibedsG3Application implements CommandLineRunner {
 
     organisateurDAO.save(eddy);
 
+    Photo photo5 = new Photo();
+    photo5.setType("PHOTO_HEBERGEMENT");
+    photo5.setUrl("https://pixabay.com/photos/to-travel-hotel-room-hotel-room-1677347/");
+
+    Logement chambre255Plumes = new Logement();
+    chambre255Plumes.setDescription("Chambre double wifi confortable");
+    chambre255Plumes.setNbPersonnes(2);
+    chambre255Plumes.setType(TypeLogement.CHAMBRE_DOUBLE);
+    chambre255Plumes.setPrix(89);
+    chambre255Plumes.getPhotos().add(photo5);
+    chambre255Plumes.setOptionsSpecifiques(" vue sur mer");
+    chambre255Plumes.setEtablissement(plumesHotel);
+
+    plumesHotel.getLogements().add(chambre255Plumes);
+
+    logementDAO.save(chambre255Plumes);
+
+    Hebergement hebergementAhmed = new Hebergement ();
+    hebergementAhmed.setFestival(festivalDeCanne);
+    hebergementAhmed.setLogement(chambre255Plumes);
+
+    hebergementDAO.save(hebergementAhmed);
+
     Festivalier ahmed = new Festivalier();
     ahmed.setNom("Kimour");
     ahmed.setPrenom("ahmed");
@@ -250,6 +289,7 @@ public class FestibedsG3Application implements CommandLineRunner {
     reservationAhmed.setStatutReservation("En cours");
     reservationAhmed.setDateReservation(LocalDate.now());
     reservationAhmed.setFestival(festivalDeCanne);
+    reservationAhmed.getHebergements().add(hebergementAhmed);
     reservationDAO.save(reservationAhmed);
 
     Festivalier mitia = new Festivalier();
@@ -294,5 +334,8 @@ public class FestibedsG3Application implements CommandLineRunner {
     plumesHotel.getAvis().add(avisMitiaPlumesHotel);
 
     festivalDAO.save(festivalDeCanne);
+
+    
+    
   }
 }

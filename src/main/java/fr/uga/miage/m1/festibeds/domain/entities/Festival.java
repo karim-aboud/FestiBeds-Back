@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -44,25 +46,29 @@ public class Festival {
 
   @ManyToOne
   @JoinColumn(name = "organisateur_id")
-  @JsonBackReference
+  @JsonIgnore
   Organisateur organisateur;
 
-  @JsonBackReference
+  @JsonIgnore
   @ManyToMany(mappedBy = "festivals", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   List<Festivalier> festivaliers = new ArrayList<>();
 
-  @JsonManagedReference
+  @JsonManagedReference(value="festival-photo")
   @OneToMany(mappedBy = "festival", cascade = CascadeType.ALL)
   List<Photo> photos = new ArrayList<Photo>();
 
-  @JsonManagedReference
   @OneToMany(mappedBy = "festival", cascade = CascadeType.ALL)
   List<AvisFestival> avis = new ArrayList<>();
 
   @OneToMany(mappedBy = "festival")
-  List<Reservation> reservations = new ArrayList<>(); 
+  List<Reservation> reservations = new ArrayList<>();
 
   @OneToMany(mappedBy = "festival")
   List<Hebergement> hebergements = new ArrayList<>();
 
+  @ManyToOne
+  @JsonIgnoreProperties({"festivals","etablissements"})
+  @JoinColumn(name="code_insee_commune")
+  Commune commune;
+ 
 }
