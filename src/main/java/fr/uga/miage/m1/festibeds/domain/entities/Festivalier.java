@@ -8,6 +8,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Festivalier extends CompteUtilisateur {
 
 
   @OneToMany(mappedBy = "festivalier", cascade = CascadeType.ALL)
+  @JsonIgnore
   List<AvisFestival> avis = new ArrayList<>();
 
   @OneToMany

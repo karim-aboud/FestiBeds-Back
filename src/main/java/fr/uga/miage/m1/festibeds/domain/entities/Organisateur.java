@@ -24,7 +24,8 @@ public class Organisateur extends CompteUtilisateur {
   String courriel;
   String motDePasse;
 
-  @OneToMany(mappedBy = "organisateur", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "organisateur", cascade = CascadeType.ALL )
+  
   @JsonManagedReference
   List<Festival> festivals = new ArrayList<>();
 

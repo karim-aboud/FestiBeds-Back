@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import fr.uga.miage.m1.festibeds.domain.entities.enums.TypeLogement;
@@ -39,6 +40,7 @@ public class Logement {
 
     @ManyToOne
     @JoinColumn(name="etablissement_id")
+    @JsonIncludeProperties({"id"})
     Etablissement etablissement;
 
 
