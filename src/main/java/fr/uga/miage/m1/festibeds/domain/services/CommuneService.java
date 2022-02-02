@@ -18,7 +18,7 @@ public class CommuneService {
     }
 
   
-    public Commune getCommuneById(String id) {
+    public Commune getCommuneById(int id) {
         return communeDAO.findById(id).get();
     }
 
@@ -38,7 +38,7 @@ public class CommuneService {
         return communeDAO.save(commune);
     }
 
-    public void deleteCommuneById(String id) {
+    public void deleteCommuneById(int id) {
         this.communeDAO.deleteById(id);
     }
 

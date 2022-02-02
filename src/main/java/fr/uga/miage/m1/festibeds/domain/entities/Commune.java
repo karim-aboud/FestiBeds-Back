@@ -13,8 +13,8 @@ import lombok.Data;
 @Data
 @Entity
 public class Commune {
-    @Id
     String codeInsee;
+    @Id
     int codePostal;
     String nomCommune;
     String nomDepartement;

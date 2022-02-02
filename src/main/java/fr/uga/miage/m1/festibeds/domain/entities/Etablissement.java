@@ -35,8 +35,11 @@ public class Etablissement {
     TypeEtablissement type;
     String nomCommercial;
     int classement;
+    String adresse;
     int capaciteAcceuil;
-    int nbUnitesHabitation;
+    String nomCommune;
+    int nbUnitesHabitationVacances;
+    int nbUnitesHabitationTourisme;
     int nbChambres;
     int nbEmplacements;
     String description;
@@ -64,6 +67,6 @@ public class Etablissement {
 
     @ManyToOne(optional = true)
     @JsonIgnoreProperties({"festivals","etablissements"})
-    @JoinColumn(name="code_insee_commune")
+    @JoinColumn(name="code_postal")
     Commune commune;
 }
